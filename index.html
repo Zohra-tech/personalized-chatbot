@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +12,7 @@
     <main class="chat-container">
 
         <header class="chat-header">
-            <div class="bot-avatar">✦</div>
-
-            <div>
+            <div class="bot-avatar">
                 <h1>NameWise</h1>
                 <p>Your name has a story. Let's see if it matches you.</p>
             </div>
@@ -26,15 +23,9 @@
             </div>
         </header>
 
-
-        <!-- Chat Area -->
         <section class="chat-area" id="chatArea">
 
-            <!-- Bot Welcome Message -->
-            <div class="message bot-message">
-                <div class="message-avatar">✦</div>
-
-                <div class="message-content">
+            <div class="message-bot">
                     <p>
                         Hi! 👋 I'm NameWise.
                     </p>
@@ -45,21 +36,27 @@
                     </p>
 
                     <p>
-                        Let's start — <strong>what's your name?</strong>
+                        Let's start — <strong>  <input
+                type="text"
+                id="userInput"
+                placeholder="what is your name?"
+                autocomplete="off"
+            ></strong>
                     </p>
                 </div>
             </div>
 
-
-            <!-- Example User Message -->
             <div class="message user-message">
                 <div class="message-content">
-                    <p>Zohra</p>
+                    <p>  <input
+                type="text"
+                id="userInput"
+                placeholder="Type your answer..."
+                autocomplete="off"
+            ></p>
                 </div>
             </div>
 
-
-            <!-- Example Bot Response -->
             <div class="message bot-message">
                 <div class="message-avatar">✦</div>
 
@@ -107,7 +104,6 @@
         </section>
 
 
-        <!-- Input Area -->
         <footer class="chat-input-area">
 
             <input
