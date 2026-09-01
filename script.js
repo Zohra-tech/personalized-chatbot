@@ -1,26 +1,31 @@
-
 let nameDatabase = [];
-
 const nameInput = document.getElementById("userInputName");
 const sendNameButton = document.getElementById("sendNameButton");
 const nameInputSection = document.getElementById("nameInputSection");
 const nameResponse = document.getElementById("nameResponse");
-const funFactSection = document.getElementById("funFactSection");
-const nameNotFoundSection = document.getElementById("nameNotFoundSection");
 const nameGreeting = document.getElementById("nameGreeting");
 const nameMeaning = document.getElementById("nameMeaning");
+const funFactSection = document.getElementById("funFactSection");
 const funFact = document.getElementById("funFact");
-const nameNotFoundMessage = document.getElementById("nameNotFoundMessage");
+const nameNotFoundSection = document.getElementById("nameNotFoundSection");
 const retryButton = document.getElementById("retryButton");
-// ==========================================
-// 3. Load names.csv
-// ==========================================
+const yesButton = document.getElementById("yesButton");
+const noButton = document.getElementById("noButton");
+const feedbackResponse = document.getElementById("feedbackResponse");
+const feedbackMessage = document.getElementById("feedbackMessage");
+const feedbackRetryButton = document.getElementById("feedbackRetryButton");
 
-fetch("names.csv")
+console.log("NameWise JavaScript started!");
+console.log("Name input:", nameInput);
+console.log("Submit button:", sendNameButton);
+
+fetch("./names.csv")
     .then(response => {
-
+        console.log("CSV response:", response.status);
         if (!response.ok) {
-            throw new Error("Could not find names.csv");
+            throw new Error(
+                "Could not load names.csv"
+            );
         }
 
         return response.text();
@@ -29,11 +34,15 @@ fetch("names.csv")
 
     .then(data => {
 
-        console.log("✅ names.csv loaded!");
+        console.log("✅ names.csv loaded");
 
         nameDatabase = parseCSV(data);
 
-        console.log("✅ Names loaded:", nameDatabase.length);
+        console.log(
+            "✅ Database loaded:",
+            nameDatabase.length,
+            "names"
+        );
 
         console.log(nameDatabase);
 
@@ -41,148 +50,129 @@ fetch("names.csv")
 
     .catch(error => {
 
-        console.error("❌ CSV ERROR:", error);
+        console.error(
+            "❌ Database error:",
+            error
+        );
 
     });
-
-
-// ==========================================
-// 4. CSV Parser
-// Handles commas inside quotes
-// ==========================================
 
 function parseCSV(data) {
 
-    const rows = [];
-    let row = [];
-    let value = "";
-    let insideQuotes = false;
+    const lines = data
+        .trim()
+        .split(/\r?\n/);
 
-    for (let i = 0; i < data.length; i++) {
+    // Remove header
+    lines.shift();
 
-        const character = data[i];
+    const database = [];
 
-        // If we find a quote
-        if (character === '"') {
+    lines.forEach(line => {
 
-            // Handle double quotes inside quoted text
-            if (insideQuotes && data[i + 1] === '"') {
+        // Split first 3 commas only
+        const parts = line.split(",");
 
-                value += '"';
-                i++;
+        if (parts.length >= 4) {
 
-            } else {
+            const name = parts[0].trim();
+            const origin = parts[1].trim();
+            const meaning = parts[2].trim();
 
-                insideQuotes = !insideQuotes;
+            // Everything after the third comma
+            // belongs to the fun fact
+            const funFact = parts
+                .slice(3)
+                .join(",")
+                .trim();
 
-            }
+            database.push({
 
-        }
+                name: name,
 
-        // Comma outside quotes = next column
-        else if (character === "," && !insideQuotes) {
+                origin: origin,
 
-            row.push(value.trim());
-            value = "";
+                meaning: meaning,
 
-        }
+                funFact: funFact
 
-        // New line outside quotes = next row
-        else if (
-            (character === "\n" || character === "\r") &&
-            !insideQuotes
-        ) {
-
-            if (character === "\r" && data[i + 1] === "\n") {
-                i++;
-            }
-
-            row.push(value.trim());
-            value = "";
-
-            if (row.length > 0) {
-                rows.push(row);
-            }
-
-            row = [];
+            });
 
         }
-
-        else {
-
-            value += character;
-
-        }
-    }
-
-
-    // Add final value
-    if (value.length > 0 || row.length > 0) {
-
-        row.push(value.trim());
-        rows.push(row);
-
-    }
-
-
-    // Remove header row
-    rows.shift();
-
-
-    // Convert rows into objects
-    return rows.map(row => {
-
-        return {
-
-            name: row[0] || "",
-            origin: row[1] || "",
-            meaning: row[2] || "",
-            funFact: row[3] || ""
-
-        };
 
     });
 
+    return database;
 }
 
+if (sendNameButton) {
 
-// ==========================================
-// 5. Button
-// ==========================================
+    sendNameButton.addEventListener(
+        "click",
+        checkName
+    );
 
-sendNameButton.addEventListener("click", checkName);
+}
 
+if (nameInput) {
 
-// ==========================================
-// 6. Enter key
-// ==========================================
+    nameInput.addEventListener(
+        "keydown",
+        function(event) {
 
-nameInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
 
-    if (event.key === "Enter") {
+                event.preventDefault();
 
-        event.preventDefault();
+                checkName();
 
-        checkName();
+            }
 
-    }
+        }
+    );
+
+}
+
+yesButton.addEventListener("click", function () {
+
+    console.log("User selected YES");
+
+    // Hide the fun fact and its buttons
+    funFactSection.classList.add("hidden");
+
+    // Show response
+    feedbackResponse.classList.remove("hidden");
+
+    feedbackMessage.textContent =
+        "Yeah, it matches me! 😄 Wow, awesome! Maybe your name knows you better than you expected.";
 
 });
 
+noButton.addEventListener("click", function () {
 
-// ==========================================
-// 7. Check name
-// ==========================================
+    console.log("User selected NO");
+
+    // Hide the fun fact and its buttons
+    funFactSection.classList.add("hidden");
+
+    // Show response
+    feedbackResponse.classList.remove("hidden");
+
+    feedbackMessage.textContent =
+        "Oh! Sorry about that. 😅 Your response has been recorded for review.";
+
+});
 
 function checkName() {
 
-    const userName = nameInput.value.trim();
+    console.log("Submit button clicked!");
 
 
-    // ------------------------------------------
-    // Empty input
-    // ------------------------------------------
+    const userName =
+        nameInput.value.trim();
 
+
+    // Empty name
     if (userName === "") {
 
         alert("Please enter your name.");
@@ -192,40 +182,45 @@ function checkName() {
     }
 
 
-    // ------------------------------------------
-    // CSV hasn't loaded yet
-    // ------------------------------------------
-
+    // Database hasn't loaded
     if (nameDatabase.length === 0) {
 
-        alert("The name database is still loading. Please try again.");
+        alert(
+            "The name database has not loaded yet. Please wait a moment and try again."
+        );
+
+        console.log(
+            "Database currently contains:",
+            nameDatabase.length,
+            "names"
+        );
 
         return;
 
     }
 
 
-    console.log("🔎 Searching for:", userName);
+    console.log(
+        "Searching database for:",
+        userName
+    );
 
 
-    // ------------------------------------------
-    // Search CSV
-    // ------------------------------------------
+    // Search for name
+    const person =
+        nameDatabase.find(
+            person =>
+                person.name.toLowerCase() ===
+                userName.toLowerCase()
+        );
 
-    const person = nameDatabase.find(person => {
-
-        return person.name.toLowerCase() === userName.toLowerCase();
-
-    });
-
-
-    // ------------------------------------------
-    // Name found
-    // ------------------------------------------
 
     if (person) {
 
-        console.log("✅ Name found:", person);
+        console.log(
+            "✅ Name found:",
+            person
+        );
 
 
         nameGreeting.textContent =
@@ -240,46 +235,114 @@ function checkName() {
             person.funFact;
 
 
-        // Show the response
+        // Show response
         nameResponse.classList.remove("hidden");
 
+
+        // Show fun fact
         funFactSection.classList.remove("hidden");
 
 
-        // Hide name input
+        // Hide not-found message
+        if (nameNotFoundSection) {
+
+            nameNotFoundSection.classList.add("hidden");
+
+        }
+
+
+        // Hide input
         nameInputSection.classList.add("hidden");
 
     }
 
-
-    // ------------------------------------------
-    // Name NOT found
-    // ------------------------------------------
-
     else {
 
-        else {
+        console.log(
+            "❌ Name not found:",
+            userName
+        );
 
-    console.log("❌ Name not found:", userName);
 
-    nameGreeting.textContent =
-        `🤔 I couldn't find "${userName}" in my database.`;
+        nameGreeting.textContent =
+            `🤔 I couldn't find "${userName}" in my database.`;
 
-    nameMeaning.textContent =
-        "I'll flag this name for the admin to review.";
 
-    // Show name response
-    nameResponse.classList.remove("hidden");
+        nameMeaning.textContent =
+            "I'll flag this name for the admin to review.";
 
-    // Show NOT FOUND section
-    nameNotFoundSection.classList.remove("hidden");
 
-    // Make sure fun fact stays hidden
-    funFactSection.classList.add("hidden");
+        // Show response
+        nameResponse.classList.remove("hidden");
 
-    // Hide name input
-    nameInputSection.classList.add("hidden");
-}
+
+        // Hide fun fact
+        funFactSection.classList.add("hidden");
+
+
+        // Show not-found section
+        if (nameNotFoundSection) {
+
+            nameNotFoundSection.classList.remove("hidden");
+
+        }
+
+
+        // Hide input
+        nameInputSection.classList.add("hidden");
+
     }
 
 }
+
+
+
+if (retryButton) {
+
+    retryButton.addEventListener(
+        "click",
+        function() {
+
+            console.log(
+                "🔄 User wants to try another name"
+            );
+
+
+            // Hide responses
+            nameResponse.classList.add("hidden");
+
+            funFactSection.classList.add("hidden");
+
+            nameNotFoundSection.classList.add("hidden");
+
+
+            // Show name input
+            nameInputSection.classList.remove("hidden");
+
+
+            // Clear input
+            nameInput.value = "";
+
+
+            // Focus input
+            nameInput.focus();
+
+        }
+    );
+
+}
+
+feedbackRetryButton.addEventListener("click", function () {
+    console.log("Try Another Name clicked!");
+    // Hide feedback response
+    feedbackResponse.classList.add("hidden");
+    // Hide previous name response
+    nameResponse.classList.add("hidden");
+    // Show name input
+    nameInputSection.classList.remove("hidden");
+    // Clear the input
+    nameInput.value = "";
+    // Put cursor back in input
+    nameInput.focus();
+
+});
