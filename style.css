@@ -371,3 +371,90 @@ button {
     }
 
 }
+
+/* ==========================================
+   FEEDBACK RESPONSE
+   ========================================== */
+
+#feedbackResponse {
+    max-width: 90%;
+    margin-top: 15px;
+}
+
+
+/* Response message box */
+
+#feedbackResponse .message-content {
+    background: #ffffff;
+
+    padding: 20px 22px;
+
+    border-radius: 16px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+
+    border-left: 5px solid #22c55e;
+}
+
+
+/* Response text */
+
+#feedbackResponse p {
+    background: transparent;
+
+    padding: 0;
+
+    margin: 0 0 18px 0;
+
+    box-shadow: none;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #1f2937;
+}
+
+
+/* ==========================================
+   TRY ANOTHER NAME BUTTON
+   ========================================== */
+
+#feedbackRetryButton {
+    display: inline-block;
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #111827;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#feedbackRetryButton:hover {
+    background: #374151;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+#feedbackRetryButton:active {
+    transform: translateY(0);
+}
