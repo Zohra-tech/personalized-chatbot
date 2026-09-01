@@ -31,57 +31,54 @@ body {
 .chat-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 20px 25px;
-    border-bottom: 1px solid #e8e8e8;
-    background: #c9fb05;
+    width: 100%;
+    padding: 20px 30px;
+    background: #c8ff00;
+    gap: 20px;
+    white-space: nowrap;
 }
 
 .bot-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-    background: #111827;
-    color: rgb(179, 165, 165);
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-shrink: 0;
+    width: auto;
 }
+
 
 .bot-avatar h1 {
-    display: none;
-}
-
-.header-info {
-    flex: 1;
-}
-
-
-.header-info h1 {
-    font-size: 20px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
     color: #111827;
-    margin-bottom: 4px;
+    white-space: nowrap;
 }
 
-.header-info p {
-    font-size: 13px;
-    color: #6b7280;
+.bot-avatar p {
+    margin: 0 0 0 15px;
+    font-size: 15px;
+    color: #374151;
+    white-space: nowrap;
 }
 
 .status {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #6b7280;
+    gap: 7px;
+    margin-left: auto;
+    font-size: 15px;
+    color: #374151;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
+
 .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background: #22c55e;
     border-radius: 50%;
+    display: inline-block;
 }
 
 .chat-area {
@@ -97,9 +94,8 @@ body {
     margin-bottom: 18px;
 }
 
-
 .message-bot p,
-.bot-message p, bot-avatar p {
+.bot-message p{
     display: inline-block;
     background: #ffffff;
     padding: 12px 16px;
@@ -115,7 +111,6 @@ body {
 .name-information {
     margin-bottom: 15px;
 }
-
 
 .name-information p {
     display: inline-block;
@@ -189,6 +184,66 @@ button {
 }
 
 #sendNameButton:active {
+    transform: translateY(0);
+}
+
+#nameNotFoundSection {
+    max-width: 90%;
+    margin-top: 15px;
+}
+
+#nameNotFoundSection .message-content {
+    background: #ffffff;
+    padding: 20px 22px;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid #f59e0b;
+}
+
+#nameNotFoundSection p {
+    background: transparent;
+    padding: 0;
+    margin: 0 0 12px 0;
+    box-shadow: none;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #1f2937;
+}
+
+#nameNotFoundSection p:first-child {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+
+#nameNotFoundSection p:nth-of-type(3) {
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.retry-btn {
+    margin-top: 5px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #111827;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.retry-btn:hover {
+    background: #374151;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.retry-btn:active {
     transform: translateY(0);
 }
 
