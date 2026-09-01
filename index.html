@@ -1,16 +1,14 @@
-<!DOCTYPE html>
+<html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Let's explore your you by your name</title>
 
+<head>
+    <title>Let's Explore You by Your Name</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <main class="chat-container">
-
+        <!-- Header -->
         <header class="chat-header">
             <div class="bot-avatar">
                 <h1>NameWise</h1>
@@ -23,94 +21,96 @@
             </div>
         </header>
 
+        <!-- Chat Area -->
         <section class="chat-area" id="chatArea">
-
+            <!-- Welcome message -->
             <div class="message-bot">
-                    <p>
-                        Hi! 👋 I'm NameWise.
-                    </p>
-
-                    <p>
-                        I'll use a small name database to discover
-                        something interesting about you.
-                    </p>
+                <p>
+                    Hi! 👋 I'm NameWise.
+                </p>
+                <p>
+                    I'll use a small name database to discover
+                    something interesting about you.
+                </p>
             </div>
-            <div class="Name-information">
-                    <p>    Let's start — <strong>  <input
-                type="text"
-                id="userInput"
-                placeholder="what is your name?"
-                autocomplete="off"
-            ></strong>
-                
-            <button id="sendButton" aria-label="Send message">
-                ➤
-            </button> </p>
+
+            <!-- Ask for name -->
+            <div class="name-information">
+                <p>
+                    Let's start — <strong>What's your name?</strong>
+                </p>
+            </div>
+
+            <!-- Name input -->
+            <div class="message user-message" id="nameInputSection">
+
+                <div class="message-content">
+                    <input
+                        type="text"
+                        id="userInputName"
+                        placeholder="Type your name..."
+                        autocomplete="off"
+                    >
+                    <button
+                        id="sendNameButton"
+                        aria-label="Send name">
+                        ➤
+                    </button>
                 </div>
             </div>
 
-            <div class="message user-message">
+            <!-- Name response -->
+            <div
+                class="message bot-message hidden"
+                id="nameResponse">
+
                 <div class="message-content">
-                    <p>  <input
-                type="text"
-                id="userInput"
-                placeholder="Type your answer..."
-                autocomplete="off"
-            >
-            <button id="sendButton" aria-label="Send message">
-                ➤
-            </button> </p>
+                    <p id="nameGreeting">
+                        <!-- JavaScript will insert greeting -->
+                    </p>
+                    <p id="nameMeaning">
+                        <!-- JavaScript will insert name meaning -->
+                    </p>
                 </div>
             </div>
 
-            <div class="message bot-message">
-                <div class="message-avatar">✦</div>
+            <!-- Fun fact -->
+            <div
+                class="message bot-message hidden"
+                id="funFactSection">
 
                 <div class="message-content">
-                    <p>
-                        Nice to meet you, <strong>Zohra!</strong> 😊
-                    </p>
-
-                    <p>
-                        Your name has Persian roots and is associated
-                        with <strong>brightness and radiance.</strong> ✨
-                    </p>
-
                     <div class="fact-card">
-                        <span class="fact-label">FUN FACT</span>
-
-                        <p>
-                            Zohra is also associated with Venus,
-                            the bright planet often called the
-                            morning or evening star.
+                        <span class="fact-label">
+                            FUN FACT
+                        </span>
+                        <p id="funFact">
+                            <!-- JavaScript will insert fun fact -->
                         </p>
                     </div>
-
+                
                     <p>
-                        Your name is often associated with someone
-                        who brings brightness and positive energy.
-                    </p>
-
-                    <p>
-                        <strong>Does this sound like you?</strong>
+                        Does this fun fact match you?
                     </p>
 
                     <div class="choice-buttons">
-                        <button class="choice-btn yes-btn">
+                        <button
+                            class="choice-btn yes-btn"
+                            id="yesButton">
                             👍 Yes, that's me
                         </button>
-
-                        <button class="choice-btn no-btn">
+                        <button
+                            class="choice-btn no-btn"
+                            id="noButton">
                             👎 Not really
                         </button>
                     </div>
                 </div>
             </div>
-
         </section>
 
-
-        <footer class="chat-input-area">
+        <!-- Bottom input -->
+        <footer class="chat-input-area hidden" id="chatInputArea">
 
             <input
                 type="text"
@@ -118,19 +118,16 @@
                 placeholder="Type your answer..."
                 autocomplete="off"
             >
-
-            <button id="sendButton" aria-label="Send message">
+            <button
+                id="sendButton"
+                aria-label="Send message">
                 ➤
             </button>
-
         </footer>
-
     </main>
-
 
     <script src="script.js"></script>
 
 </body>
-</html>
-```
 
+</html>
