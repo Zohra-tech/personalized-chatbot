@@ -1,1 +1,134 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Let's explore your you by your name</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="chat-container">
+
+        <header class="chat-header">
+            <div class="bot-avatar">✦</div>
+
+            <div>
+                <h1>NameWise</h1>
+                <p>Your name has a story. Let's see if it matches you.</p>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Online
+            </div>
+        </header>
+
+
+        <!-- Chat Area -->
+        <section class="chat-area" id="chatArea">
+
+            <!-- Bot Welcome Message -->
+            <div class="message bot-message">
+                <div class="message-avatar">✦</div>
+
+                <div class="message-content">
+                    <p>
+                        Hi! 👋 I'm NameWise.
+                    </p>
+
+                    <p>
+                        I'll use a small name database to discover
+                        something interesting about you.
+                    </p>
+
+                    <p>
+                        Let's start — <strong>what's your name?</strong>
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Example User Message -->
+            <div class="message user-message">
+                <div class="message-content">
+                    <p>Zohra</p>
+                </div>
+            </div>
+
+
+            <!-- Example Bot Response -->
+            <div class="message bot-message">
+                <div class="message-avatar">✦</div>
+
+                <div class="message-content">
+                    <p>
+                        Nice to meet you, <strong>Zohra!</strong> 😊
+                    </p>
+
+                    <p>
+                        Your name has Persian roots and is associated
+                        with <strong>brightness and radiance.</strong> ✨
+                    </p>
+
+                    <div class="fact-card">
+                        <span class="fact-label">FUN FACT</span>
+
+                        <p>
+                            Zohra is also associated with Venus,
+                            the bright planet often called the
+                            morning or evening star.
+                        </p>
+                    </div>
+
+                    <p>
+                        Your name is often associated with someone
+                        who brings brightness and positive energy.
+                    </p>
+
+                    <p>
+                        <strong>Does this sound like you?</strong>
+                    </p>
+
+                    <div class="choice-buttons">
+                        <button class="choice-btn yes-btn">
+                            👍 Yes, that's me
+                        </button>
+
+                        <button class="choice-btn no-btn">
+                            👎 Not really
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Input Area -->
+        <footer class="chat-input-area">
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Type your answer..."
+                autocomplete="off"
+            >
+
+            <button id="sendButton" aria-label="Send message">
+                ➤
+            </button>
+
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
 
