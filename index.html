@@ -1,18 +1,15 @@
 <html>
 <html lang="en">
-
 <head>
     <title>Let's Explore You by Your Name</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <main class="chat-container">
-        <!-- Header -->
         <header class="chat-header">
             <div class="bot-avatar">
                 <h1>NameWise</h1>
-                <p>Your name has a story. Let's see if it matches you.</p>
+                <p>Your name has a story. Let's find the secret behind it!
             </div>
 
             <div class="status">
@@ -107,6 +104,17 @@
                     </div>
                 </div>
             </div>
+            <!-- User Feedback Response -->
+            <div class="message bot-message hidden" id="feedbackResponse">
+                <div class="message-content">
+                     <p id="feedbackMessage"></p>
+                       <button
+                         class="choice-btn retry-btn"
+                          id="feedbackRetryButton">
+                           🔄 Try Another Name
+                        </button>
+                    </div>
+                </div>
         </section>
                 <!-- Name Not Found -->
                 <div class="message bot-message hidden" id="nameNotFoundSection">
